@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // multi time work manager
+        // اقل وقت ليه عشان يشتغل هو 20 دقيقة
         btnCancel.setVisibility(View.VISIBLE);
 
 //        Constraints constraints = new Constraints.Builder()
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 //                .build();
 
         workRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class,
-                5, TimeUnit.MINUTES)
+                20, TimeUnit.MINUTES)
                 // .setConstraints(constraints)
                 .build();
 
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWorkManager.enqueueUniquePeriodicWork("Send Data", ExistingPeriodicWorkPolicy.REPLACE, workRequest);
-
+                //mWorkManager.enqueueUniquePeriodicWork("Send Data", ExistingPeriodicWorkPolicy.REPLACE, workRequest);
+                mWorkManager.enqueue(workRequest);
             }
         });
 
